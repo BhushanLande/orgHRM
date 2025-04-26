@@ -1,8 +1,8 @@
 tools:
- jdk:
-   flavor: azul
-   version: 11
- maven: 3.9.4
+  jdk:
+    flavor: azul
+    version: 11
+  maven: 3.9.4
 
 triggers:
   cron:
@@ -11,8 +11,8 @@ triggers:
   push: disable
   pr: disable
   manual:
-  name: build
-  call: default
+    name: build
+    call: default
 
 flows:
   default:
@@ -22,9 +22,10 @@ flows:
     - mail:
         from: bhushanlande525@gmail.com
         to: bhushanlande525@gmail.com
-        subject: "Oranage HRM"
-        message: "build url: $BUILD_URL
-                  \n test report: "
+        subject: "Orange HRM"
+        message: |
+          build url: $BUILD_URL
+          test report:
 
   automation:
     - exposeVars(maven)
@@ -33,9 +34,11 @@ flows:
     - mail:
         from: bhushanlande525@gmail.com
         to: bhushanlande525@gmail.com
-        subject: "Oranage HRM"
-        message: "build url: $BUILD_URL
-                 \n test report: "
+        subject: "Orange HRM"
+        message: |
+          build url: $BUILD_URL
+          test report:
+
   pr:
     try:
       - echo "Running build for $GITHUB_PR_URL"
@@ -48,36 +51,39 @@ flows:
     catch:
       - echo "Build failed"
     finally:
-      -  call: generateReport
+      - call: generateReport
 
   versionCheck:
     - (name JDK Version) java --version
     - (name Maven Version) mvn -s $(MAVEN_HOME)/conf/settings.xml -v
+
   runNewTest:
     try:
       - (name Run Test Cucumber) mvn -s $(MAVEN_HOME)/conf/settings.xml verify -Pserenity-cucumber
     catch:
-     - echo "Run Test Completed"
+      - echo "Run Test Completed"
+
   runTestAggregate:
     try:
       - (name Aggregate Report) mvn -s $(MAVEN_HOME)/conf/settings.xml verify -Pserenity-cucumber serenity:aggregate
     catch:
-     - echo "Serenity Report aggregate task completed"
+      - echo "Serenity Report aggregate task completed"
+
   runTestAutomation:
     try:
       - (name Run Test Cucumber) mvn -s $(MAVEN_HOME)/conf/settings.xml verify -Pserenity-cucumber
     catch:
-     - echo "Run Test Completed"
+      - echo "Run Test Completed"
 
   build:
     try:
       - exposeVars(maven)
       - (name Project information) echo "Building $(MAVEN_GROUP_ID):$(MAVEN_ARTIFACT_ID):$(MAVEN_VERSION)"
-      - (name Maven install) mvn -s $(MAVEN_HOME)/conf/settings.xml clean deploy -Dmaven.skip.test
+      - (name Maven install) mvn -s $(MAVEN_HOME)/conf/settings.xml clean deploy -Dmaven.test.skip
       - call: runNewTest
       - call: runTestAggregate
       - parallel:
-         - call: hygieiaPublish
+          - call: hygieiaPublish
     catch:
       - echo "Build failed"
     finally:
@@ -91,18 +97,18 @@ flows:
       - call: runTestAutomation
       - call: runTestAggregate
       - parallel:
-         - call: hygieiaPublish
+          - call: hygieiaPublish
     catch:
       - echo "Build failed"
     finally:
       - call: generateReport
 
   hygieiaPublish:
-   - hygieia.publishBuild()
+    - hygieia.publishBuild()
 
   generateReport:
     - publishReport:
-      context: TestNG
-      dir: /target/site
-      index: serenity/index.html
-      verbose: true
+        context: TestNG
+        dir: /target/site
+        index: serenity/index.html
+        verbose: true
