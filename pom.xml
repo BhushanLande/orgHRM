@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>org.bhushanLande</groupId>
     <artifactId>OrgHRM</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
@@ -56,12 +56,26 @@
         </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <properties>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <serenity.version>3.6.12</serenity.version>
+        <serenity.maven.version>3.6.12</serenity.maven.version>
         <cucumber.version>7.14.0</cucumber.version>  <!-- match with serenity-cucumber version -->
     </properties>
 
@@ -93,5 +107,63 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>serenity-junit</id>
+            <build>
+                <plugins>
+                    <!-- Skip Surefire (unit tests) -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M4</version>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+
+                    <!-- Failsafe for parallel execution of BDD -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>3.2.5</version>
+                        <configuration>
+                            <includes>
+                                <include>**/*Runner.java</include>
+                            </includes>
+                            <parallel>methods</parallel>
+                            <threadCount>4</threadCount>
+                            <perCoreThreadCount>false</perCoreThreadCount>
+<!--                            <argLine>-Xmx1024m</argLine>-->
+<!--                            <debugForkedProcess>true</debugForkedProcess>-->
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Serenity Maven Plugin -->
+                    <plugin>
+                        <groupId>net.serenity-bdd.maven.plugins</groupId>
+                        <artifactId>serenity-maven-plugin</artifactId>
+                        <version>${serenity.maven.version}</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>net.serenity-bdd</groupId>
+                                <artifactId>serenity-core</artifactId>
+                                <version>${serenity.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
