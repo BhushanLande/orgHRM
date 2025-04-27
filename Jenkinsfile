@@ -11,6 +11,10 @@ pipeline {
         cron('00 01 * * *')       // Daily at 1:00 AM
     } */
 
+    parameters {
+        string(name: 'TAGS', defaultValue: '@Smoke', description: 'Cucumber tags to execute')
+    }
+
     environment {
         RECIPIENTS = "bhushanlande525@gmail.com"
     }
@@ -27,7 +31,8 @@ pipeline {
         stage('Run Tests') {
             steps {
                 echo "Running Serenity-Cucumber tests..."
-                bat 'mvn clean verify -Pserenity-junit'  // user sh for linux or mac (bat for windows)
+//                 bat 'mvn clean verify -Pserenity-junit'  // user sh for linux or mac (bat for windows)
+                bat 'mvn clean verify -Pserenity-junit -Dcucumber.filter.tags='${params.TAGS}'
             }
         }
 
