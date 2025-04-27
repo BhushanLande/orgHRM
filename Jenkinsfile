@@ -30,7 +30,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                echo "Running Serenity-Cucumber tests..."
+                echo "Running Serenity-Cucumber tests with tag: @${params.TAGS} and environment: ${params.ENV}"
 //                 bat 'mvn clean verify -Pserenity-junit'  // user sh for linux or mac (bat for windows)
                 bat 'mvn clean verify -Pserenity-junit -Dcucumber.filter.tags="@${parameters.TAGS}"'  // Execution with tagging for env -Denvironment=${parameters.ENV}
             }
