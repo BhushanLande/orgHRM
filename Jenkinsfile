@@ -32,8 +32,9 @@ pipeline {
         stage('Run Tests') {
             steps {
                 echo "Running Serenity-Cucumber tests with tag: @${params.TAGS} and environment: ${params.ENV}"
-//                 bat 'mvn clean verify -Pserenity-junit'  // user sh for linux or mac (bat for windows)
-//                 bat 'mvn clean verify -Pserenity-junit -Dcucumber.filter.tags="@${params.TAGS}"' // or using this command for linux and mac with params
+                // user sh for linux or mac (bat for windows)
+                // bat 'mvn clean verify -Pserenity-junit'  // user sh for linux or mac (bat for windows)
+                // bat 'mvn clean verify -Pserenity-junit -Dcucumber.filter.tags="@${params.TAGS}"' // or using this command for linux and mac with params
                 bat "mvn clean verify -Pserenity-junit -Dcucumber.filter.tags=\"@${params.TAGS}\""  // Execution with tagging for env -Denvironment=${parameters.ENV}
             }
         }
@@ -58,25 +59,39 @@ pipeline {
 
         stage('Publish Reports') {
             steps {
-               archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/serenity/index.html', followSymlinks: false
+                archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/serenity/index.html', followSymlinks: false
             }
         }
     }
 
-      /* post {
-         success {
-            mail to: "${env.RECIPIENTS}",
-                 subject: "✅ Build Success - Orange HRM",
-                 body: "Build URL: ${env.BUILD_URL}\nTest report: ${env.BUILD_URL}Serenity Test Report"
+    // Add Jenkins plugin Email Extension Plugin
+    post {
+        success {
+            // Send an email on success
+            emailext to: "${env.RECIPIENTS}",
+                     subject: "✅ Build Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                     body: """\
+Build URL: ${env.BUILD_URL}
+Test report: ${env.BUILD_URL}target/site/serenity/index.html
+"""
         }
         failure {
-            mail to: "${env.RECIPIENTS}",
-                 subject: "❌ Build Failed - Orange HRM",
-                 body: "Build URL: ${env.BUILD_URL}\nPlease check the console output."
+            // Send an email on failure
+            emailext to: "${env.RECIPIENTS}",
+                     subject: "❌ Build Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                     body: """\
+Build URL: ${env.BUILD_URL}
+Console Output: ${env.BUILD_URL}console
+"""
         }
         always {
-            // Optional: if you're using surefire for JUnit XML reports
-            junit '**//*  *//*  *//*  *//* target/surefire-reports *//*  *//*  *//*  *//*.xml'
+            // Optional: Always send a final email with the build status
+            emailext to: "${env.RECIPIENTS}",
+                     subject: "Build Status - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                     body: """\
+Build URL: ${env.BUILD_URL}
+Build Status: ${currentBuild.currentResult}
+"""
         }
-    } */
+    }
 }
