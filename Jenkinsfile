@@ -64,8 +64,8 @@ pipeline {
         }
     }
 
-    // Add Jenkins plugin Email Extension Plugin
-    post {
+    // Add Jenkins plugin Email Extension Plugin it requires Oauth and multiple configurations
+    /* post {
         success {
             // Send an email on success
             emailext from: "${env.RECIPIENTS}",
@@ -94,5 +94,5 @@ pipeline {
                            Build Status: ${currentBuild.currentResult}
                            """
         }
-    }
+    } */
 }
