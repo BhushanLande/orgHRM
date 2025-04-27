@@ -45,10 +45,15 @@ pipeline {
             }
         }
 
-        stage('Publish Reports') {
-             steps {
-                 archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/serenity/index.html', followSymlinks: false
-                 }
+        stage('Publish Serenity TestNG Report') {
+            steps {
+                publishHTML(target: [
+                            reportName: 'Serenity TestNG Report',
+                            reportDir: 'target/site/serenity',
+                            reportFiles: 'index.html',
+                            verbose: true
+                ])
+            }
         }
     }
 
