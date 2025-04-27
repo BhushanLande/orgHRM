@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JDK 18'              // Must match the JDK name in Jenkins tools
-        maven 'Maven 3.8.5'       // Must match the Maven name in Jenkins tools
+        jdk 'JDK 18'              // Match name in Jenkins tool config
+        maven 'Maven 3.8.5'
     }
 
     triggers {
@@ -19,36 +19,36 @@ pipeline {
     stages {
         stage('Version Check') {
             steps {
-                sh 'java --version'
-                sh 'mvn -v'
+                bat 'java -version'
+                bat 'mvn -v'
             }
         }
 
         stage('Build Project') {
             steps {
                 echo "Building project..."
-                sh 'mvn -s $MAVEN_HOME/conf/settings.xml clean deploy -Dmaven.test.skip=true'
+                bat 'mvn clean deploy -Dmaven.test.skip=true'
             }
         }
 
         stage('Run Tests') {
             steps {
                 echo "Running Serenity-Cucumber tests..."
-                sh 'mvn -s $MAVEN_HOME/conf/settings.xml verify -Pserenity-cucumber'
+                bat 'mvn -s %MAVEN_HOME%\\conf\\settings.xml verify -Pserenity-cucumber'
             }
         }
 
         stage('Aggregate Report') {
             steps {
-                echo "Generating aggregate Serenity report..."
-                sh 'mvn -s $MAVEN_HOME/conf/settings.xml verify -Pserenity-cucumber serenity:aggregate'
+                echo "Generating Serenity aggregate report..."
+                bat 'mvn -s %MAVEN_HOME%\\conf\\settings.xml serenity:aggregate'
             }
         }
 
         stage('Publish Reports') {
             steps {
                 publishHTML([
-                    reportDir: "${REPORT_DIR}",
+                    reportDir: "${env.REPORT_DIR}",
                     reportFiles: 'index.html',
                     reportName: 'Serenity Test Report',
                     keepAll: true,
@@ -60,7 +60,7 @@ pipeline {
     }
 
     post {
-        success {
+        /* success {
             mail to: "${env.RECIPIENTS}",
                  subject: "✅ Build Success - Orange HRM",
                  body: "Build URL: ${env.BUILD_URL}\nTest report: ${env.BUILD_URL}Serenity Test Report"
@@ -69,8 +69,9 @@ pipeline {
             mail to: "${env.RECIPIENTS}",
                  subject: "❌ Build Failed - Orange HRM",
                  body: "Build URL: ${env.BUILD_URL}\nPlease check the console output."
-        }
+        }*/
         always {
+            // Optional: if you're using surefire for JUnit XML reports
             junit '**/target/surefire-reports/*.xml'
         }
     }
