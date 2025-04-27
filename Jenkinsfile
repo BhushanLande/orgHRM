@@ -34,7 +34,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 echo "Running Serenity-Cucumber tests..."
-                bat 'mvn -s %MAVEN_HOME%\\conf\\settings.xml verify -Pserenity-cucumber'
+                bat 'mvn -s %MAVEN_HOME%\\conf\\settings.xml verify -Pserenity-cucumber -Dcucumber.options="--tags @cucumber"'
             }
         }
 
