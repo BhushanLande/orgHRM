@@ -69,10 +69,10 @@ pipeline {
             mail to: "${env.RECIPIENTS}",
                  subject: "❌ Build Failed - Orange HRM",
                  body: "Build URL: ${env.BUILD_URL}\nPlease check the console output."
-        }*/
+        }
         always {
             // Optional: if you're using surefire for JUnit XML reports
             junit '**/target/surefire-reports/*.xml'
-        }
+        }*/
     }
 }
