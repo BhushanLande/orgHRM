@@ -46,16 +46,9 @@ pipeline {
         }
 
         stage('Publish Reports') {
-            steps {
-                publishHTML([
-                    reportDir: "${env.REPORT_DIR}",
-                    reportFiles: 'index.html',
-                    reportName: 'Serenity Test Report',
-                    keepAll: true,
-                    alwaysLinkToLastBuild: true,
-                    allowMissing: true
-                ])
-            }
+             steps {
+                 archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/serenity/index.html', followSymlinks: false
+                 }
         }
     }
 
