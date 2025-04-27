@@ -12,7 +12,7 @@ pipeline {
     } */
 
     parameters {
-        choices(name: 'TAGS', defaultValue: '@Smoke or @Regression or @Sanity', description: 'Cucumber tags to execute')
+        choice(name: 'TAGS', defaultValue: '@Smoke or @Regression or @Sanity', description: 'Cucumber tags to execute')
 //         string(name: 'ENV', choices: ['dev', 'qa', 'prod'], description: 'Select environment to run tests against') //enable for env and add serenity.conf file and pass env
     }
 
