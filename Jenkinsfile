@@ -68,30 +68,31 @@ pipeline {
     post {
         success {
             // Send an email on success
-            emailext to: "${env.RECIPIENTS}",
+            emailext from: "${env.RECIPIENTS}",
+                     to: "${env.RECIPIENTS}",
                      subject: "✅ Build Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                      body: """\
-Build URL: ${env.BUILD_URL}
-Test report: ${env.BUILD_URL}target/site/serenity/index.html
-"""
+                           Build URL: ${env.BUILD_URL}
+                           Test report: ${env.BUILD_URL}target/site/serenity/index.html
+                           """
         }
         failure {
             // Send an email on failure
             emailext to: "${env.RECIPIENTS}",
                      subject: "❌ Build Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                      body: """\
-Build URL: ${env.BUILD_URL}
-Console Output: ${env.BUILD_URL}console
-"""
+                           Build URL: ${env.BUILD_URL}
+                           Console Output: ${env.BUILD_URL}console
+                           """
         }
         always {
             // Optional: Always send a final email with the build status
             emailext to: "${env.RECIPIENTS}",
                      subject: "Build Status - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                      body: """\
-Build URL: ${env.BUILD_URL}
-Build Status: ${currentBuild.currentResult}
-"""
+                           Build URL: ${env.BUILD_URL}
+                           Build Status: ${currentBuild.currentResult}
+                           """
         }
     }
 }
