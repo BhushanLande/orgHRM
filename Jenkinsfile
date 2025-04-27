@@ -13,6 +13,7 @@ pipeline {
 
     parameters {
         choice(name: 'TAGS', choices: ['Smoke', 'Regression', 'Sanity'], description: 'Cucumber tags to execute')
+        choice(name: 'ENV', choices: ['dev', 'qa', 'prod'], description: 'Select environment to run tests against') //Choices for env
     }
 
     environment {
@@ -32,7 +33,7 @@ pipeline {
             steps {
                 echo "Running Serenity-Cucumber tests with tag: @${params.TAGS} and environment: ${params.ENV}"
 //                 bat 'mvn clean verify -Pserenity-junit'  // user sh for linux or mac (bat for windows)
-                bat 'mvn clean verify -Pserenity-junit -Dcucumber.filter.tags="@${parameters.TAGS}"'  // Execution with tagging for env -Denvironment=${parameters.ENV}
+                bat 'mvn clean verify -Pserenity-junit -Dcucumber.filter.tags="@${params.TAGS}"'  // Execution with tagging for env -Denvironment=${parameters.ENV}
             }
         }
 
