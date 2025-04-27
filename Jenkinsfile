@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JDK 18'              // Match name in Jenkins tool config
-        maven 'Maven 3.8.5'
+        jdk 'JDK 18'              // Match name in Jenkins tool config and path should be of server
+        maven 'Maven 3.8.5'       // Match name in Jenkins tool config and path should be of server
     }
 
     triggers {
@@ -11,8 +11,6 @@ pipeline {
     }
 
     environment {
-        MAVEN_OPTS = "-Dmaven.test.failure.ignore=true"
-        REPORT_DIR = "target/site/serenity"
         RECIPIENTS = "bhushanlande525@gmail.com"
     }
 
@@ -21,13 +19,6 @@ pipeline {
             steps {
                 bat 'java -version'
                 bat 'mvn -v'
-            }
-        }
-
-        stage('Build Project') {
-            steps {
-                echo "Building project..."
-//                 bat 'mvn clean deploy -Dmaven.test.skip=true'
             }
         }
 
