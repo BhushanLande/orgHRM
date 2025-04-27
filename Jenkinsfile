@@ -13,7 +13,7 @@ pipeline {
 
     parameters {
         - string(name: 'TAGS', defaultValue: '@Smoke or @Regression or @Sanity', description: 'Cucumber tags to execute')
-        - choice(name: 'ENV', choices: ['dev', 'qa', 'prod'], description: 'Select environment to run tests against')
+        - string(name: 'ENV', choices: ['dev', 'qa', 'prod'], description: 'Select environment to run tests against')
     }
 
     environment {
