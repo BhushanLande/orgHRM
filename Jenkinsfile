@@ -59,8 +59,8 @@ pipeline {
         }
     }
 
-    post {
-        /* success {
+    /* post {
+         success {
             mail to: "${env.RECIPIENTS}",
                  subject: "✅ Build Success - Orange HRM",
                  body: "Build URL: ${env.BUILD_URL}\nTest report: ${env.BUILD_URL}Serenity Test Report"
@@ -72,7 +72,7 @@ pipeline {
         }
         always {
             // Optional: if you're using surefire for JUnit XML reports
-            junit '**/target/surefire-reports/*.xml'
-        }*/
-    }
+            junit '**//* target/surefire-reports *//*.xml'
+        }
+     */}
 }
