@@ -7,9 +7,9 @@ pipeline {
         maven 'Maven 3.8.5'       // Match name in Jenkins tool config and path should be of server
     }
 
-    triggers {
-//         cron('00 01 * * *')       // Daily at 1:00 AM
-    }
+    /* triggers {
+        cron('00 01 * * *')       // Daily at 1:00 AM
+    } */
 
     environment {
         RECIPIENTS = "bhushanlande525@gmail.com"
