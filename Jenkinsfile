@@ -38,12 +38,6 @@ pipeline {
             }
         }
 
-        stage('Publish Reports') {
-            steps {
-               archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/serenity/index.html', followSymlinks: false
-            }
-        }
-
         stage('Publish Serenity TestNG Report') {
             steps {
                 publishHTML(target: [
@@ -52,6 +46,12 @@ pipeline {
                             reportFiles: 'index.html',
                             verbose: true
                 ])
+            }
+        }
+
+        stage('Publish Reports') {
+            steps {
+               archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/serenity/index.html', followSymlinks: false
             }
         }
     }
