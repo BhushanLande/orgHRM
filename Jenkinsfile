@@ -34,7 +34,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 echo "Running Serenity-Cucumber tests..."
-                bat 'mvn clean verify'
+                bat 'mvn clean verify -Pserenity-junit'
             }
         }
 
