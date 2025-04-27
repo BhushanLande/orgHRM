@@ -32,7 +32,7 @@ pipeline {
             steps {
                 echo "Running Serenity-Cucumber tests..."
 //                 bat 'mvn clean verify -Pserenity-junit'  // user sh for linux or mac (bat for windows)
-                bat 'mvn clean verify -Pserenity-junit -Dcucumber.filter.tags="@Smoke"
+                bat 'mvn clean verify -Pserenity-junit -Dcucumber.filter.tags="@Smoke"'
             }
         }
 
