@@ -41,7 +41,7 @@ pipeline {
         stage('Aggregate Report') {
             steps {
                 echo "Generating Serenity aggregate report..."
-                bat 'mvn -s %MAVEN_HOME%\\conf\\settings.xml serenity:aggregate'
+                bat 'mvn serenity:aggregate'
             }
         }
 
