@@ -64,6 +64,15 @@ pipeline {
         }
     }
 
+post {
+  always {
+    publishHTML(target: [
+      reportDir: 'target/site/serenity',
+      reportFiles: 'index.html',
+      reportName: 'TestNG'
+    ])
+  }
+}
     // Add Jenkins plugin Email Extension Plugin it requires Oauth and multiple configurations
     /* post {
         success {
