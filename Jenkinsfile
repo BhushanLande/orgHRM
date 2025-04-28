@@ -61,9 +61,33 @@ pipeline {
 
         stage('Publish Reports') {
             steps {
-                archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/serenity/**', followSymlinks: false
+                archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/serenity/index.html', followSymlinks: false
             }
         }
+
+        stage('Generate and Publish Report') {
+            steps {
+                echo "Generating and publishing Serenity report..."
+                script {
+                    // Mimicking your YAML-like report configuration in the Jenkins pipeline
+                    def reportConfig = [
+                        context : 'Serenity',                   // Using the context "Serenity"
+                        dir     : 'target/site/serenity',       // Directory where the Serenity report is located
+                        index   : 'index.html',                 // Main report file
+                        verbose : true                           // Enable verbose logging
+                    ]
+                    // This mimics the desired functionality within the pipeline
+                    publishHTML(target: [
+                        reportName            : 'Serenity Report',
+                        reportDir             : reportConfig.dir,
+                        reportFiles           : reportConfig.index,
+                        keepAll               : true,
+                        alwaysLinkToLastBuild : true,
+                        allowMissing          : true,
+                        verbose               : reportConfig.verbose
+                    ])
+                }
+            }
     }
 
     // Add Jenkins plugin Email Extension Plugin it requires Oauth and multiple configurations
