@@ -88,6 +88,7 @@ pipeline {
                     ])
                 }
             }
+       }
     }
 
     // Add Jenkins plugin Email Extension Plugin it requires Oauth and multiple configurations
