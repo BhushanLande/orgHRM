@@ -59,7 +59,8 @@ pipeline {
 
         stage('Publish Reports') {
             steps {
-                archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/serenity/index.html', followSymlinks: false
+//                 archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/serenity/index.html', followSymlinks: false
+                archiveArtifacts allowEmptyArchive: true, artifacts: 'target', followSymlinks: false
             }
         }
     }
@@ -67,7 +68,7 @@ pipeline {
 post {
   always {
     publishHTML(target: [
-      reportDir: 'target/site/serenity',
+      reportDir: 'target/',
       reportFiles: 'index.html',
       reportName: 'TestNG'
     ])
