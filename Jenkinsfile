@@ -49,17 +49,19 @@ pipeline {
         stage('Publish Serenity TestNG Report') {
             steps {
                 publishHTML(target: [
-                            reportName: 'Serenity TestNG Report',
-                            reportDir: 'target/site/serenity',
-                            reportFiles: 'index.html',
-                            verbose: true
+                    reportName            : 'TestNG Report',
+                    reportDir             : 'target/site/serenity',
+                    reportFiles           : 'index.html',
+                    keepAll               : true,
+                    alwaysLinkToLastBuild : true,
+                    allowMissing          : true
                 ])
             }
         }
 
         stage('Publish Reports') {
             steps {
-                archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/serenity/index.html', followSymlinks: false
+                archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/serenity/**', followSymlinks: false
             }
         }
     }
