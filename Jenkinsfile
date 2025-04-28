@@ -59,21 +59,11 @@ pipeline {
 
         stage('Publish Reports') {
             steps {
-//                 archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/serenity/index.html', followSymlinks: false
-                archiveArtifacts allowEmptyArchive: true, artifacts: 'target', followSymlinks: false
+                archiveArtifacts allowEmptyArchive: true, artifacts: 'target/site/serenity/index.html', followSymlinks: false
             }
         }
     }
 
-post {
-  always {
-    publishHTML(target: [
-      reportDir: 'target/',
-      reportFiles: 'index.html',
-      reportName: 'TestNG'
-    ])
-  }
-}
     // Add Jenkins plugin Email Extension Plugin it requires Oauth and multiple configurations
     /* post {
         success {
