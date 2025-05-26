@@ -35,6 +35,12 @@
             <version>3.2.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.1.2</version> <!-- Match this to your current project version -->
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-cucumber -->
         <dependency>
             <groupId>net.serenity-bdd</groupId>
@@ -53,6 +59,25 @@
             <artifactId>serenity-screenplay</artifactId>
             <version>3.2.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.11.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Apache POI Core -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.3</version>
+        </dependency>
+
+        <!-- Apache POI for Excel (.xlsx) -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.3</version>
         </dependency>
     </dependencies>
 
@@ -97,14 +122,14 @@
             </plugin>
 
             <!-- Compiler Plugin (optional, but clean) -->
-            <plugin>
+            <!--<plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 
