@@ -15,6 +15,10 @@ public class LoginPage extends PageObject {
 
     @FindBy(xpath = "//button[@type='submit']")
     WebElementFacade loginButton;
+
+    @FindBy(xpath = "//input[@placeholder='Search']")
+    WebElementFacade searchInputBox;
+
     public void enterTheUsername(String userName) throws InterruptedException {
         Thread.sleep(3000);
         waitFor(userNameTab).waitUntilClickable();
@@ -36,6 +40,14 @@ public class LoginPage extends PageObject {
         logger.info("Clicking login button");
         return this;
     }
+
+    public void enterTheSearchOptions(String option) throws InterruptedException {
+        Thread.sleep(3000);
+        waitFor(searchInputBox).waitUntilClickable();
+        searchInputBox.sendKeys(option);
+        logger.info("Entering options: "+option);
+    }
+
 
 }
 

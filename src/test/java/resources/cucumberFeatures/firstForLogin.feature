@@ -20,3 +20,17 @@ Feature: Login for demo site OrangeHRM
     Given user launches Login page of demo site
     Then user launch orange HRM site and enter creds
     Then user wait for landing page to load
+
+  @TC04 @Smoke
+  Scenario Outline: Verify the search feature
+    Given user launches Login page of demo site
+    Then user launch orange HRM site and enter creds
+    Then user search with "<option>"
+    @Run
+    Examples:
+      | option |
+      | Admin  |
+    @Skip
+    Examples:
+      | option |
+      | PIM    |
