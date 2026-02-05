@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class LoginPage extends PageObject {
     Logger logger = LoggerFactory.getLogger(getClass());
-    @FindBy(xpath = "//input[@name='username']")
+    @FindBy(xpath = "//input[@name='usernamee']")
     WebElementFacade userNameTab;
 
     @FindBy(xpath = "//input[@name='password']")
@@ -19,6 +19,11 @@ public class LoginPage extends PageObject {
     @FindBy(xpath = "//input[@placeholder='Search']")
     WebElementFacade searchInputBox;
 
+    public void openSite() {
+        String url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+        getDriver().get(url);
+        logger.info("Opening URL: "+url);
+    }
     public void enterTheUsername(String userName) throws InterruptedException {
         Thread.sleep(3000);
         waitFor(userNameTab).waitUntilClickable();
