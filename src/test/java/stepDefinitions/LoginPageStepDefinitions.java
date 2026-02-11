@@ -14,7 +14,8 @@ public class LoginPageStepDefinitions {
     InvokeColumns invokeColumns = new InvokeColumns();
     @Given("user launches Login page of demo site")
     public void user_launches_login_page_of_demo_site() {
-        loginPage.openSite();
+        loginPage.open();
+//        loginPage.openSite();
     }
 
     @Given("user launch orange HRM site and enter creds")

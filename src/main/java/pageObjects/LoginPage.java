@@ -7,13 +7,13 @@ import org.slf4j.LoggerFactory;
 
 public class LoginPage extends PageObject {
     Logger logger = LoggerFactory.getLogger(getClass());
-    @FindBy(xpath = "//input[@name='usernamee']")
+    @FindBy(name = "//input[@name='username']")
     WebElementFacade userNameTab;
 
     @FindBy(xpath = "//input[@name='password']")
     WebElementFacade passwordTab;
 
-    @FindBy(xpath = "//button[@type='submit']")
+    @FindBy(xpath = "//button[@type='login']")
     WebElementFacade loginButton;
 
     @FindBy(xpath = "//input[@placeholder='Search']")

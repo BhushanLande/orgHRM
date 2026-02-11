@@ -38,6 +38,7 @@ public class HealeniumDriverProvider implements DriverSource {
                 options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
                 WebDriver delegate = new ChromeDriver(options);
                 return SelfHealingDriver.create(delegate);
+//                return delegate;
             }
 
             case "firefox": {
