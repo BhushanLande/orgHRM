@@ -7,13 +7,14 @@ import org.slf4j.LoggerFactory;
 
 public class LoginPage extends PageObject {
     Logger logger = LoggerFactory.getLogger(getClass());
-    @FindBy(name = "//input[@name='username']")
+    @FindBy(xpath = "//input[@name='username']")
     WebElementFacade userNameTab;
 
     @FindBy(xpath = "//input[@name='password']")
     WebElementFacade passwordTab;
 
-    @FindBy(xpath = "//button[@type='login']")
+//    @FindBy(xpath = "//button[@type='submit']")
+    @FindBy(xpath = "//button[@name='submit']")
     WebElementFacade loginButton;
 
     @FindBy(xpath = "//input[@placeholder='Search']")
@@ -40,6 +41,7 @@ public class LoginPage extends PageObject {
     }
     public LoginPage clickOnTheLoginButton() throws InterruptedException {
         Thread.sleep(3000);
+        System.out.println("Current URL: " + getDriver().getCurrentUrl());
         waitFor(loginButton).waitUntilClickable();
         clickOn(loginButton);
         logger.info("Clicking login button");

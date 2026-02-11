@@ -1,0 +1,40 @@
+2026-02-11 18:17:31.505  INFO 7 - [       main] .e.h.h.HealeniumProxyApplication : Starting HealeniumProxyApplication v2.1.9 using Java 23.0.2 with PID 7 (/hlm-proxy.jar started by root in /) 
+2026-02-11 18:17:31.535  INFO 7 - [       main] .e.h.h.HealeniumProxyApplication : No active profile set, falling back to 1 default profile: "default" 
+2026-02-11 18:17:39.335  INFO 7 - [       main] o.s.c.c.scope.GenericScope       : BeanFactory id=fc466dc5-3db9-3cc4-a1cc-ab844db52ba4 
+2026-02-11 18:17:45.722  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [After] 
+2026-02-11 18:17:45.725  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Before] 
+2026-02-11 18:17:45.726  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Between] 
+2026-02-11 18:17:45.727  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Cookie] 
+2026-02-11 18:17:45.728  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Header] 
+2026-02-11 18:17:45.729  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Host] 
+2026-02-11 18:17:45.730  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Method] 
+2026-02-11 18:17:45.731  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Path] 
+2026-02-11 18:17:45.732  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Query] 
+2026-02-11 18:17:45.734  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [ReadBody] 
+2026-02-11 18:17:45.736  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [RemoteAddr] 
+2026-02-11 18:17:45.739  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [XForwardedRemoteAddr] 
+2026-02-11 18:17:45.740  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Weight] 
+2026-02-11 18:17:45.741  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [CloudFoundryRouteService] 
+2026-02-11 18:17:46.923  INFO 7 - [       main] .s.b.a.e.w.EndpointLinksResolver : Exposing 1 endpoint beneath base path '/actuator' 
+2026-02-11 18:17:50.060  INFO 7 - [       main] o.s.b.w.e.netty.NettyWebServer   : Netty started on port 8085 (http) 
+2026-02-11 18:17:50.570  INFO 7 - [       main] .e.h.h.HealeniumProxyApplication : Started HealeniumProxyApplication in 32.657 seconds (process running for 54.293) 
+2026-02-11 19:08:31.256  INFO 7 - [       main] .e.h.h.HealeniumProxyApplication : Starting HealeniumProxyApplication v2.1.9 using Java 23.0.2 with PID 7 (/hlm-proxy.jar started by root in /) 
+2026-02-11 19:08:31.279  INFO 7 - [       main] .e.h.h.HealeniumProxyApplication : No active profile set, falling back to 1 default profile: "default" 
+2026-02-11 19:08:39.139  INFO 7 - [       main] o.s.c.c.scope.GenericScope       : BeanFactory id=fc466dc5-3db9-3cc4-a1cc-ab844db52ba4 
+2026-02-11 19:08:43.281  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [After] 
+2026-02-11 19:08:43.295  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Before] 
+2026-02-11 19:08:43.299  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Between] 
+2026-02-11 19:08:43.307  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Cookie] 
+2026-02-11 19:08:43.311  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Header] 
+2026-02-11 19:08:43.317  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Host] 
+2026-02-11 19:08:43.322  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Method] 
+2026-02-11 19:08:43.326  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Path] 
+2026-02-11 19:08:43.330  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Query] 
+2026-02-11 19:08:43.334  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [ReadBody] 
+2026-02-11 19:08:43.338  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [RemoteAddr] 
+2026-02-11 19:08:43.343  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [XForwardedRemoteAddr] 
+2026-02-11 19:08:43.345  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [Weight] 
+2026-02-11 19:08:43.349  INFO 7 - [       main] .g.r.RouteDefinitionRouteLocator : Loaded RoutePredicateFactory [CloudFoundryRouteService] 
+2026-02-11 19:08:44.393  INFO 7 - [       main] .s.b.a.e.w.EndpointLinksResolver : Exposing 1 endpoint beneath base path '/actuator' 
+2026-02-11 19:08:46.380  INFO 7 - [       main] o.s.b.w.e.netty.NettyWebServer   : Netty started on port 8085 (http) 
+2026-02-11 19:08:46.711  INFO 7 - [       main] .e.h.h.HealeniumProxyApplication : Started HealeniumProxyApplication in 23.967 seconds (process running for 45.226) 
