@@ -35,5 +35,8 @@ public class LoginPageStepDefinitions {
     public void user_search_with(String options) throws InterruptedException {
         loginPage.enterTheSearchOptions(options);
     }
-
+    @Then("verify landing page is displayed")
+    public void verify_landing_page_is_displayed() throws InterruptedException {
+        loginPage.clickDashboardPageUsingImage();
+    }
 }

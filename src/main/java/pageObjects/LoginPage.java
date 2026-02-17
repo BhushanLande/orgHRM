@@ -4,6 +4,9 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
+import utils.OpenCVUtil;
+import utils.ScreenshotUtil;
 
 public class LoginPage extends PageObject {
     Logger logger = LoggerFactory.getLogger(getClass());
@@ -46,6 +49,17 @@ public class LoginPage extends PageObject {
         waitFor(searchInputBox).waitUntilClickable();
         searchInputBox.sendKeys(option);
         logger.info("Entering options: "+option);
+    }
+
+    public void clickDashboardPageUsingImage() throws InterruptedException {
+        waitFor(searchInputBox).waitUntilClickable();
+        Thread.sleep(5000);
+        String screenshot =
+                ScreenshotUtil.captureScreenshot(getDriver(), "landing_screen");
+
+        String template =
+                "src/main/resources/images/landing_page.png";
+        Assert.assertTrue(OpenCVUtil.clickUsingImage(getDriver(), screenshot, template), "Dashboard page not found using image recognition.");
     }
 
 

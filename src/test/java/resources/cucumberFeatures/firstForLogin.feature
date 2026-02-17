@@ -16,10 +16,10 @@ Feature: Login for demo site OrangeHRM
     Then user wait for landing page to load
 
   @TC03 @Smoke
-  Scenario: Verify the utest 3
+  Scenario: Verify the visulization of landing page
     Given user launches Login page of demo site
     Then user launch orange HRM site and enter creds
-    Then user wait for landing page to load
+    Then verify landing page is displayed
 
   @TC04 @Smoke
   Scenario Outline: Verify the search feature
