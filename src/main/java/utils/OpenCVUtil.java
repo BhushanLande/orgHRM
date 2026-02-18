@@ -68,7 +68,7 @@ public class OpenCVUtil {
         Core.MinMaxLocResult mmr = Core.minMaxLoc(result);
         System.out.println("[RESULT] Maximum Similarity Score: " + mmr.maxVal);
 
-        double threshold = 0.6;
+        double threshold = 0.5;
         System.out.println("[INFO] Threshold for strict validation: " + threshold);
 
         if (mmr.maxVal >= threshold) {
@@ -78,5 +78,11 @@ public class OpenCVUtil {
             System.out.println("[FAILURE] Image match FAILED. Similarity below strict threshold.");
             return false;
         }
+    }
+    public static Mat resizeMat(Mat input, int width, int height) {
+        Mat output = new Mat();
+        Size sz = new Size(width, height);
+        Imgproc.resize(input, output, sz);
+        return output;
     }
 }
