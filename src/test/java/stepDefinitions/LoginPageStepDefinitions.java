@@ -13,8 +13,9 @@ public class LoginPageStepDefinitions {
     LoginPage loginPage;
     InvokeColumns invokeColumns = new InvokeColumns();
     @Given("user launches Login page of demo site")
-    public void user_launches_login_page_of_demo_site() {
+    public void user_launches_login_page_of_demo_site() throws InterruptedException {
         loginPage.open();
+// loginPage.setSizeAndCenter(768,1024, LoginPage.CenterMode.PRIMARY, 1.25);
     }
 
     @Given("user launch orange HRM site and enter creds")
@@ -36,7 +37,8 @@ public class LoginPageStepDefinitions {
         loginPage.enterTheSearchOptions(options);
     }
     @Then("verify landing page is displayed")
-    public void verify_landing_page_is_displayed() throws InterruptedException {
+    public void verify_landing_page_is_displayed() throws Exception {
         loginPage.clickDashboardPageUsingImage();
+        loginPage.validateLogoAndHeader();
     }
 }
