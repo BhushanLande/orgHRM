@@ -75,8 +75,7 @@ public class LoginPage extends PageObject {
     public void clickDashboardPageUsingImage() throws Exception {
         waitFor(searchInputBox).waitUntilClickable();
         Thread.sleep(5000);
-        String screenshot =
-                ScreenshotUtil.captureScreenshot(getDriver(), "landing_screen");
+        String screenshot =ScreenshotUtil.captureScreenshot(getDriver(), "landing_screen");
 
         String template =
                 "src/main/resources/images/landing_page.png";
