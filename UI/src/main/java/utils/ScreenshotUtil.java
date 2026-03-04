@@ -23,7 +23,7 @@ public class ScreenshotUtil {
         try {
             File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             String path = "screenshots/" + fileName + ".png";
-            FileUtils.copyFile(src, new File(path));
+//            FileUtils.copyFile(src, new File(path));
             return path;
         } catch (Exception e) {
             throw new RuntimeException("Screenshot failed");

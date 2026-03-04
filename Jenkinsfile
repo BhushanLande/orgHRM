@@ -29,14 +29,24 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+        stage('Run UI Tests') {
             steps {
                 echo "Running Serenity-Cucumber tests with tag: @${params.TAGS} and environment: ${params.ENV}"
                 // user sh for linux or mac (bat for windows)
-                // bat 'mvn clean verify -Pserenity-junit'  // user sh for linux or mac (bat for windows)
-                // bat 'mvn clean verify -Pserenity-junit -Dcucumber.filter.tags="@${params.TAGS}"' // or using this command for linux and mac with params
-                bat "mvn clean verify -Pserenity-junit -Dcucumber.filter.tags=\"@${params.TAGS}\""  // Execution with tagging for env -Denvironment=${parameters.ENV}
+                // bat 'mvn clean verify -pl UI -Pserenity-junit'  // user sh for linux or mac (bat for windows)
+                // bat 'mvn clean verify -pl UI -Pserenity-junit -Dcucumber.filter.tags="@${params.TAGS}"' // or using this command for linux and mac with params
+                bat "mvn clean verify -pl UI -Pserenity-junit -Dcucumber.filter.tags=\"@${params.TAGS}\""  // Execution with tagging for env -Denvironment=${parameters.ENV}
             }
+        }
+
+        stage('Run API Tests') {
+            steps {
+                echo "Running Serenity-Cucumber tests with tag: @${params.TAGS} and environment: ${params.ENV}"
+                // user sh for linux or mac (bat for windows)
+                // bat 'mvn clean verify -pl API -Pserenity-junit'  // user sh for linux or mac (bat for windows)
+                // bat 'mvn clean verify -pl API -Pserenity-junit -Dcucumber.filter.tags="@${params.TAGS}"' // or using this command for linux and mac with params
+                bat "mvn clean verify -pl API"
+           }
         }
 
         stage('Aggregate Report') {
