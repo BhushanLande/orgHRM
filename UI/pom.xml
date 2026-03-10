@@ -88,7 +88,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.5.6</version> <!-- or current stable -->
+            <version>1.5.6</version>
             <scope>test</scope>
         </dependency>
 
@@ -128,20 +128,6 @@
 
     <build>
         <plugins>
-            <!-- Serenity Maven Plugin for reports -->
-            <plugin>
-                <groupId>net.serenity-bdd.maven.plugins</groupId>
-                <artifactId>serenity-maven-plugin</artifactId>
-                <version>${serenity.version}</version>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>aggregate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
             <!-- Compiler Plugin -->
             <plugin>
@@ -152,65 +138,68 @@
                     <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
+
+            <!-- Surefire for mvn test -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+
+                <configuration>
+                    <includes>
+                        <include>**/*Runner.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+            <!-- Failsafe for mvn verify/install -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.2.5</version>
+
+                <configuration>
+                    <includes>
+                        <include>**/*Runner.java</include>
+                    </includes>
+
+                    <parallel>methods</parallel>
+                    <threadCount>4</threadCount>
+                    <perCoreThreadCount>false</perCoreThreadCount>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>integration-tests</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+            </plugin>
+
+            <!-- Serenity Report -->
+            <plugin>
+                <groupId>net.serenity-bdd.maven.plugins</groupId>
+                <artifactId>serenity-maven-plugin</artifactId>
+                <version>${serenity.version}</version>
+
+                <executions>
+                    <execution>
+                        <id>serenity-reports</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+            </plugin>
+
         </plugins>
+
     </build>
-
-    <profiles>
-        <profile>
-            <id>serenity-junit</id>
-            <build>
-                <plugins>
-                    <!-- Skip Surefire -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.0.0-M4</version>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-
-                    <!-- Failsafe for Serenity/Cucumber runners -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>3.2.5</version>
-                        <configuration>
-                            <includes>
-                                <include>**/*Runner.java</include>
-                            </includes>
-                            <parallel>methods</parallel>
-                            <threadCount>4</threadCount>
-                            <perCoreThreadCount>false</perCoreThreadCount>
-                            <!--                            <argLine>-Xmx1024m</argLine>-->
-                            <!--                            <debugForkedProcess>true</debugForkedProcess>-->
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <!-- Serenity Maven Plugin -->
-                    <plugin>
-                        <groupId>net.serenity-bdd.maven.plugins</groupId>
-                        <artifactId>serenity-maven-plugin</artifactId>
-                        <version>${serenity.version}</version>
-                        <dependencies>
-                            <dependency>
-                                <groupId>net.serenity-bdd</groupId>
-                                <artifactId>serenity-core</artifactId>
-                                <version>${serenity.version}</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 
 </project>
